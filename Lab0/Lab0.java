@@ -66,7 +66,7 @@ class Algorithms {
 			NlogNAlgorithm(i);
 			endTime = System.currentTimeMillis();
 			endTime = endTime - startTime;
-			System.out.println("T)" + i + ") = " + endTime);
+			System.out.println("T(" + i + ") = " + endTime);
 		}
 	}
    public static  void linearAlgorithm(long N) {
