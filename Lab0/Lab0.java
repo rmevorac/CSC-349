@@ -21,7 +21,7 @@ class Algorithms {
 	{
 		long startTime;
 		long endTime;
-		for(long i = 1000; i < 100000001; i*=2)
+		for(long i = 1000; i < 512001; i*=2)
 		{
 			startTime = System.currentTimeMillis();
 			quadraticAlgorithm(i);
@@ -34,7 +34,7 @@ class Algorithms {
 	{
 		long startTime;
 		long endTime;
-		for(long i = 1000; i < 100000001; i *=2)
+		for(long i = 1000; i < 8000; i *=2)
 		{
 			startTime = System.currentTimeMillis();
 			cubicAlgorithm(i);
@@ -113,15 +113,15 @@ class Algorithms {
    }
 	public static void main(String[] args)
 	{
-		System.out.println("Linear algorithm's running times:");
-		printLinearTime();
-		System.out.println("Quadratic algorithm's running times:");
-		printQuadraticTime();
-		System.out.println("Cubic algorithm's running times:");
-		printCubicTime();
 		System.out.println("Logarithmic algorithm's running times:");
 		printLogTime();
-		System.out.println("Nlog(N) algorithm's running times:");
+		System.out.println("\nLinear algorithm's running times:");
+		printLinearTime();
+		System.out.println("\nNlogN algorithm's running times:");
 		printLogNTime();
+		System.out.println("\nQuadratic algorithm's running times:");
+		printQuadraticTime();
+		System.out.println("\nCubic algorithm's running times:");
+		printCubicTime();
 	}
 }
