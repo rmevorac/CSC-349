@@ -34,7 +34,7 @@ class Algorithms {
 	{
 		long startTime;
 		long endTime;
-		for(long i = 1000; i < 8000; i *=2)
+		for(long i = 1000; i < 8001; i *=2)
 		{
 			startTime = System.currentTimeMillis();
 			cubicAlgorithm(i);
