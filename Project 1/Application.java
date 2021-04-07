@@ -1,5 +1,4 @@
 //Roey Mevorach and Tyler Hart
-
 import java.util.*;
 import java.util.Arrays;
 import java.util.Random;
@@ -67,6 +66,6 @@ class Application {
 
    public static void main(String[] args) {
       Application app = new Application();
-      app.testBubbleSort();
+      app.testSelectionSort();
    }
 }
