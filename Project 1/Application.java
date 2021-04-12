@@ -7,15 +7,15 @@ class Application {
    public Application() {
    }
 
-   private static int randomFill() {
-      return new Random().nextInt(50);
+   private static int randomFill(int N) {
+      return new Random().nextInt(N-1);
   }
 
-   public int[] createArray() {
-      int[] arr = new int[10];
+   public int[] createArray(int N) {
+      int[] arr = new int[N];
 
       for (int i = 0; i < arr.length; i++) {
-         arr[i] = randomFill();
+         arr[i] = randomFill(N);
       }
 
       return arr;
@@ -31,32 +31,37 @@ class Application {
       System.out.print("\n");
    }
 
-   public void testBubbleSort() {
-      int[] arr = createArray();
-      printArray(arr);
-
+   public void testBubbleSort(int N) {
+      int[] arr = createArray(N);
+      //printArray(arr);
+      long x;
+      long t = System.currentTimeMillis();
       Sorts.bubbleSort(arr, arr.length);
+      x = System.currentTimeMillis();
       printArray(arr);
    }
 
-   public void testSelectionSort() {
-      int[] arr = createArray();
-      printArray(arr);
-
+   public void testSelectionSort(int N) {
+      int[] arr = createArray(N);
+      //printArray(arr);
+      long x;
+      long t = System.currentTimeMillis();
       Sorts.selectionSort(arr, arr.length);
-      printArray(arr);
+      x = System.currentTimeMillis();
+      System.out.print("T_ss=" + (x-t) + ", ");
+      //printArray(arr);
    }
 
-   public void testMergeSort() {
-      int[] arr = createArray();
+   public void testMergeSort(int N) {
+      int[] arr = createArray(N);
       printArray(arr);
 
       Sorts.mergeSort(arr, arr.length);
       printArray(arr);
    }
 
-   public void testQuickSort() {
-      int[] arr = createArray();
+   public void testQuickSort(int N) {
+      int[] arr = createArray(N);
       printArray(arr);
 
       Sorts.quickSort(arr, arr.length);
@@ -66,6 +71,8 @@ class Application {
 
    public static void main(String[] args) {
       Application app = new Application();
-      app.testSelectionSort();
+      System.out.print("N=5000: ");
+      app.testSelectionSort(5000);
+      app.testBubbleSort(5000);
    }
 }
