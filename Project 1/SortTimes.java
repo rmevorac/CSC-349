@@ -1,4 +1,7 @@
 //Roey Mevorach and Tyler Hart
+//rmevorac and tyhart
+//4/12/2021
+//Project1
 
 import java.util.*;
 import java.util.Arrays;

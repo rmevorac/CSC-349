@@ -53,8 +53,10 @@ class Application {
    public void testMergeSort(int N, int[] arr) {
       long x;
       long t = System.currentTimeMillis();
+      printArray(arr);
       Sorts.mergeSort(arr, arr.length);
       x = System.currentTimeMillis();
+      printArray(arr);
       System.out.print("T_ms="+(x-t) + ", ");
    }
 
@@ -71,7 +73,7 @@ class Application {
       Application app = new Application();
       int[] arr;
       int[] temp;
-      for(int i = 5000; i <= 160000; i*=2)
+      for(int i = 5; i <= 50; i*=2)
       {
          for(int q = 1; q <= 5; q++)
          {
