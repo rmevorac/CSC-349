@@ -71,5 +71,7 @@ class MatrixWork {
             }
             System.out.println();
         }
+        fsc.close();
+        sc.close();
     }
 }
