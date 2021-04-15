@@ -42,10 +42,11 @@ class MatrixWork {
         Scanner fsc = new Scanner(file);
         int row = fsc.nextInt();
         int column = fsc.nextInt();
+        System.out.println("Matrix A: row = "+ row + " and column = " + column);
         int A[][] = new int[row][column];
         for(i = 0; i < row; i++)
         {
-            for(q = 0; q < column; q++);
+            for(q = 0; q < column; q++)
             {
                 A[i][q] = fsc.nextInt();
             }
@@ -64,7 +65,7 @@ class MatrixWork {
         System.out.println("Product matrix:");
         for(i = 0; i < C.length; i++)
         {
-            for(q = 0; q < C[0].length; q++);
+            for(q = 0; q < C[0].length; q++)
             {
                 System.out.print(C[i][q] + " ");
             }
