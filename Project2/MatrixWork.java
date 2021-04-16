@@ -42,7 +42,6 @@ class MatrixWork {
         Scanner fsc = new Scanner(file);
         int row = fsc.nextInt();
         int column = fsc.nextInt();
-        System.out.println("Matrix A: row = "+ row + " and column = " + column);
         int A[][] = new int[row][column];
         for(i = 0; i < row; i++)
         {
@@ -61,7 +60,8 @@ class MatrixWork {
                 B[i][q] = fsc.nextInt();
             }
         }
-        int[][] C = matrixProduct(A,B);
+        try{
+            int[][] C = matrixProduct(A,B);
         System.out.println("Product matrix:");
         for(i = 0; i < C.length; i++)
         {
@@ -71,6 +71,11 @@ class MatrixWork {
             }
             System.out.println();
         }
+    }
+    catch(IllegalArgumentException e)
+    {
+        System.out.println("Matrix A Columns != Matrix B Rows");
+    }
         fsc.close();
         sc.close();
     }
