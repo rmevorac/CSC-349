@@ -32,6 +32,63 @@ class MatrixWork {
         }
         return C;
     }
+    public static int[][] matrixProduct_DAC(int[][] A, int[][] B)
+    {
+        if(A.length != B.length || A[0].length != B[0].length || (A[0].length != B.length))
+        {
+            throw new IllegalArgumentException("Matrix not square");
+        }
+        if((A.length % 2) != 0 || (B[0].length % 2) != 0)
+            throw new IllegalArgumentException("Matrix not compatible");
+        int n = A.length;
+        int [][] C = matrixProduct_DAC(A, 0, 0, B, 0, 0, n);
+        return C;
+    }
+    public static int[][] matrixProduct_DAC(int[][] A, int startrowA, int startcolA, int[][] B, int startrowB, int startcolB, int n)
+    {
+        int i = 0;
+        int y = 0;
+        int[][] C = new int[n][n];
+        if(n == 1)
+            C[0][0] = A[startrowA][startcolA] * B[startrowB][startcolB];
+        else
+        {
+            int half = n/2;
+            int [][] c11 = matrixProduct_DAC(A,startrowA,startcolA,B,startrowB,startcolB,half);
+            int [][] c12 = matrixProduct_DAC(A,startrowA,startcolA+half,B,startrowB,startcolB+half,half);
+            int [][] c21 = matrixProduct_DAC(A,startrowA+half,startcolA,B,startrowB+half,startcolB,half);
+            int [][] c22 = matrixProduct_DAC(A,startrowA+half,startcolA+half,B,startrowB+half,startcolB+half,half);
+            for(i = 0; i < half; i++)
+            {
+                for(y = 0; y < half; y++)
+                {
+                    C[i][y] = c11[i][y];
+                }
+            }
+            for(i = 0; i < half; i++)
+            {
+                for(y = 0; y < half; y++)
+                {
+                    C[i][y+half] = c12[i][y];
+                }
+            }
+            for(i = 0; i < half; i++)
+            {
+                for(y = 0; y < half; y++)
+                {
+                    C[i+half][y] = c21[i][y];
+                }
+            }
+            for(i = 0; i < half; i++)
+            {
+                for(y = 0; y < half; y++)
+                {
+                    C[i+half][y+half] = c22[i][y];
+                }
+            }
+        }
+        return C;
+    }
 
     public static void main(String[] args) throws FileNotFoundException{
         System.out.println("Please enter filename containing Matrix information:");
@@ -62,7 +119,17 @@ class MatrixWork {
         }
         try{
             int[][] C = matrixProduct(A,B);
-        System.out.println("Product matrix:");
+            System.out.println("Product matrix:");
+        for(i = 0; i < C.length; i++)
+        {
+            for(q = 0; q < C[0].length; q++)
+            {
+                System.out.print(C[i][q] + " ");
+            }
+            System.out.println();
+        }
+        C = matrixProduct_DAC(A, B);
+        System.out.println("DAC Product matrix:");
         for(i = 0; i < C.length; i++)
         {
             for(q = 0; q < C[0].length; q++)
