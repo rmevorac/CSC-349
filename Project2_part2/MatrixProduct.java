@@ -38,7 +38,8 @@ class MatrixWork {
         {
             throw new IllegalArgumentException("Matrix not square");
         }
-        if((A.length % 2) != 0 || (B[0].length % 2) != 0)
+        double x = Math.log(A.length);
+        if((A.length % 2) != 0 || (B[0].length % 2) != 0 || floor(x) != x)
             throw new IllegalArgumentException("Matrix not compatible");
         int n = A.length;
         int [][] C = matrixProduct_DAC(A, 0, 0, B, 0, 0, n);
@@ -100,7 +101,6 @@ class MatrixWork {
 
         return C;
     }
-
     public static void main(String[] args) throws FileNotFoundException{
         System.out.println("Please enter filename containing Matrix information:");
         int i = 0, q = 0;
