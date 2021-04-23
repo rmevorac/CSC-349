@@ -1,15 +1,12 @@
 //Roey Mevorach and Tyler Hart
 //rmevorac and tyhart
-//4/14/2021
-//Project2 part 1
+//4/23/2021
+//Project2 part 2
 
-import java.util.*;
-import java.util.Arrays;
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.lang.Math;
 
-class MatrixWork {
-    public MatrixWork() {
+class MatrixProduct {
+    public MatrixProduct() {
     }
 
     public static int[][] matrixProduct(int[][] A, int[][] B) {
@@ -18,13 +15,11 @@ class MatrixWork {
         int[][] C = new int[A.length][B[0].length];
         if(x != y)
             throw new IllegalArgumentException("Matrix A Columns != Matrix B Rows");
-        for(int row = 0; row < A.length; row++)
-        {
-            for(int column = 0; column < B[0].length; column++)
-            {
+
+        for(int row = 0; row < A.length; row++) {
+            for(int column = 0; column < B[0].length; column++) {
                 int total = 0;
-                for(int i = 0; i < A[row].length; i++)
-                {
+                for(int i = 0; i < A[row].length; i++) {
                     total += (A[row][i] * B[i][column]);
                 }
                 C[row][column] = total;
@@ -32,27 +27,27 @@ class MatrixWork {
         }
         return C;
     }
-    public static int[][] matrixProduct_DAC(int[][] A, int[][] B)
-    {
+    public static int[][] matrixProduct_DAC(int[][] A, int[][] B) {
         if(A.length != B.length || A[0].length != B[0].length || (A[0].length != B.length))
-        {
             throw new IllegalArgumentException("Matrix not square");
-        }
-        if((A.length % 2) != 0 || (B[0].length % 2) != 0)
+
+        double x = Math.log(A.length)/Math.log(2);
+
+        if((A.length % 2) != 0 || (B[0].length % 2) != 0 || Math.floor(x) != x)
             throw new IllegalArgumentException("Matrix not compatible");
+
         int n = A.length;
         int [][] C = matrixProduct_DAC(A, 0, 0, B, 0, 0, n);
         return C;
     }
-    public static int[][] matrixProduct_DAC(int[][] A, int startrowA, int startcolA, int[][] B, int startrowB, int startcolB, int n)
-    {
+
+    private static int[][] matrixProduct_DAC(int[][] A, int startrowA, int startcolA, int[][] B, int startrowB, int startcolB, int n) {
         int i = 0;
         int y = 0;
         int[][] C = new int[n][n];
         if(n == 1)
             C[0][0] = A[startrowA][startcolA] * B[startrowB][startcolB];
-        else
-        {
+        else {
             int half = n/2;
             int [][] c11 = matrixAddition(matrixProduct_DAC(A,startrowA,startcolA,B,startrowB,startcolB,half), matrixProduct_DAC(A, startrowA, startcolA + half, B, startrowB + half, startcolB, half), half);
             int [][] c12 = matrixAddition(matrixProduct_DAC(A,startrowA,startcolA,B,startrowB,startcolB+half,half), matrixProduct_DAC(A, startrowA, startcolA + half, B, startrowB + half, startcolB + half, half), half);
@@ -101,60 +96,85 @@ class MatrixWork {
         return C;
     }
 
-    public static void main(String[] args) throws FileNotFoundException{
-        System.out.println("Please enter filename containing Matrix information:");
-        int i = 0, q = 0;
-        Scanner sc = new Scanner(System.in);
-        String fname = sc.next();
-        File file = new File(fname);
-        Scanner fsc = new Scanner(file);
-        int row = fsc.nextInt();
-        int column = fsc.nextInt();
-        int A[][] = new int[row][column];
-        for(i = 0; i < row; i++)
-        {
-            for(q = 0; q < column; q++)
-            {
-                A[i][q] = fsc.nextInt();
+    public static int[][] matrixArithmetic(int[][] A, int startrowA, int startcolA, int[][] B, int startrowB, int startcolB, int n, int flag) {
+        int[][] C = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (flag == 1)
+                    C[i][j] = A[i + startrowA][j + startcolA] - B[i + startrowB][j + startcolB];
+                else
+                    C[i][j] = A[i + startrowA][j + startcolA] + B[i + startrowB][j + startcolB];
             }
         }
-        row = fsc.nextInt();
-        column = fsc.nextInt();
-        int[][] B = new int[row][column];
-        for(i = 0; i < row; i++)
-        {
-            for(q = 0; q < column; q++)
-            {
-                B[i][q] = fsc.nextInt();
-            }
-        }
-        try{
-            int[][] C = matrixProduct(A,B);
-            System.out.println("Product matrix:");
-        for(i = 0; i < C.length; i++)
-        {
-            for(q = 0; q < C[0].length; q++)
-            {
-                System.out.print(C[i][q] + " ");
-            }
-            System.out.println();
-        }
-        C = matrixProduct_DAC(A, B);
-        System.out.println("DAC Product matrix:");
-        for(i = 0; i < C.length; i++)
-        {
-            for(q = 0; q < C[0].length; q++)
-            {
-                System.out.print(C[i][q] + " ");
-            }
-            System.out.println();
-        }
+
+        return C;
     }
-    catch(IllegalArgumentException e)
-    {
-        System.out.println("Matrix A Columns != Matrix B Rows");
+
+    public static int[][] matrixProduct_Strassen(int[][] A,  int[][] B) {
+        if(A.length != B.length || A[0].length != B[0].length || (A[0].length != B.length))
+            throw new IllegalArgumentException("Matrix not square");
+
+        double x = Math.log(A.length)/Math.log(2);
+
+        if((A.length % 2) != 0 || (B[0].length % 2) != 0 || Math.floor(x) != x)
+            throw new IllegalArgumentException("Matrix not compatible");
+
+        int n = A.length;
+        int [][] C = matrixProduct_Strassen(A, 0, 0, B, 0, 0, n);
+        return C;
     }
-        fsc.close();
-        sc.close();
+
+    private static int[][] matrixProduct_Strassen(int[][] A, int startrowA, int startcolA, int[][] B, int startrowB, int startcolB, int n) {
+        int i = 0;
+        int y = 0;
+        int[][] C = new int[n][n];
+        if(n == 1)
+            C[0][0] = A[startrowA][startcolA] * B[startrowB][startcolB];
+        else {
+            int half = n/2;
+            int [][] s1 = matrixArithmetic(B, startrowB, startcolB + half, B, startrowB + half, startcolB + half, half, 1);
+            int [][] s2 = matrixArithmetic(A, startrowA, startcolA, A, startrowA, startcolA + half, half, 0);
+            int [][] s3 = matrixArithmetic(A, startrowA + half, startcolA, A, startrowA + half, startcolA + half, half, 0);
+            int [][] s4 = matrixArithmetic(B, startrowB + half, startcolB, B, startrowB, startcolB, half, 1);
+            int [][] s5 = matrixArithmetic(A, startrowA, startcolA, A, startrowA + half, startcolA + half, half, 0);
+            int [][] s6 = matrixArithmetic(B, startrowB, startcolB, B, startrowB + half, startcolB + half, half, 0);
+            int [][] s7 = matrixArithmetic(A, startrowA, startcolA + half, A, startrowA + half, startcolA + half, half, 1);
+            int [][] s8 = matrixArithmetic(B, startrowB + half, startcolB, B, startrowB + half, startcolB + half, half, 0);
+            int [][] s9 = matrixArithmetic(A, startrowA, startcolA, A, startrowA + half, startcolA, half, 1);
+            int [][] s10 = matrixArithmetic(B, startrowB, startcolB, B, startrowB, startcolB + half, half, 0);
+            int [][] p1 = matrixProduct_Strassen(A, startrowA, startcolA, s1, 0, 0, half);
+            int [][] p2 = matrixProduct_Strassen(s2, 0, 0, B, startrowB + half, startcolB + half, half);
+            int [][] p3 = matrixProduct_Strassen(s3, 0, 0, B, startrowB, startcolB, half);
+            int [][] p4 = matrixProduct_Strassen(A, startrowA + half, startcolA + half, s4, 0, 0, half);
+            int [][] p5 = matrixProduct_Strassen(s5, 0, 0, s6, 0, 0, half);
+            int [][] p6 = matrixProduct_Strassen(s7, 0, 0, s8, 0, 0, half);
+            int [][] p7 = matrixProduct_Strassen(s9, 0, 0, s10, 0, 0, half);
+            int [][] c11 = matrixArithmetic(matrixArithmetic(p5, 0, 0, p4, 0, 0, half, 0), 0, 0, matrixArithmetic(p2, 0, 0, p6, 0, 0, half, 0), 0, 0, half, 1);
+            int [][] c12 = matrixArithmetic(p1, 0, 0, p2, 0, 0, half, 0);
+            int [][] c21 = matrixArithmetic(p3, 0, 0, p4, 0, 0, half, 0);
+            int [][] c22 = matrixArithmetic(matrixArithmetic(p5, 0, 0, p1, 0, 0, half, 0), 0, 0, matrixArithmetic(p3, 0, 0, p7, 0, 0, half, 1), 0, 0, half, 1);
+
+            for(i = 0; i < half; i++) {
+                for(y = 0; y < half; y++) {
+                    C[i][y] = c11[i][y];
+                }
+            }
+            for(i = 0; i < half; i++) {
+                for(y = 0; y < half; y++) {
+                    C[i][y+half] = c12[i][y];
+                }
+            }
+            for(i = 0; i < half; i++) {
+                for(y = 0; y < half; y++) {
+                    C[i+half][y] = c21[i][y];
+                }
+            }
+            for(i = 0; i < half; i++) {
+                for(y = 0; y < half; y++) {
+                    C[i+half][y+half] = c22[i][y];
+                }
+            }
+        }
+        return C;
     }
 }
