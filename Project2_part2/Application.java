@@ -32,7 +32,7 @@ class Application {
       }
 
       try {
-         int[][] C = MatrixProduct.matrixProduct(A,B);
+         int[][] C = matrixProduct(A,B);
          System.out.println("Product matrix:");
          for(i = 0; i < C.length; i++) {
                for(q = 0; q < C[0].length; q++) {
@@ -66,5 +66,24 @@ class Application {
 
       fsc.close();
       sc.close();
+   }
+
+   public static int[][] matrixProduct(int[][] A, int[][] B) {
+      int x = A[0].length;
+      int y = B.length;
+      int[][] C = new int[A.length][B[0].length];
+      if(x != y)
+          throw new IllegalArgumentException("Matrix A Columns != Matrix B Rows");
+
+      for(int row = 0; row < A.length; row++) {
+          for(int column = 0; column < B[0].length; column++) {
+              int total = 0;
+              for(int i = 0; i < A[row].length; i++) {
+                  total += (A[row][i] * B[i][column]);
+              }
+              C[row][column] = total;
+          }
+      }
+      return C;
    }
 }
