@@ -24,9 +24,21 @@ class ChangeMaker {
          d[i] = sc.nextInt();
       System.out.println("Enter a positive amount to be changed (enter 0 to quit):");
       int n = sc.nextInt();
+      if(n == 0)
+         return;
       System.out.print("Coin array of size " + x + ": ");
       for(i = 0; i < x; i++)
          System.out.print("["+ d[i] + "] ");
       System.out.println("\nAmount to be changed: " + n);
+      try{
+         int[] s = change_DP(n,d);
+      }
+      catch(IllegalArgumentException e) {
+         System.out.println("Input Error");
+      }
+      String od = "ASSIGN OPTIMAL DISTRIBUTION HERE";
+      int cc = 0;
+      System.out.println("DP algorithm results\nAmount: " + n + "\nOptimal distribution: " + od);
+      System.out.println("Optimal coin count: " + cc);
    }
 }
