@@ -13,7 +13,7 @@ class ChangeMaker {
       int k = d.length;
       int[] C = new int[n+1];
       int[] A = new int[n+1];
-      int found = 0;
+      int[] B = new int[k];
       int x;
       C[0] = 0;
       for(x = 1; x <= n; x++)
