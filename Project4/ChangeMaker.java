@@ -10,7 +10,34 @@ import java.io.FileNotFoundException;
 class ChangeMaker {
 
    public static int[] change_DP(int n, int[] d) {
-      
+      int k = d.length;
+      int[] C = new int[n+1];
+      int[] A = new int[n+1];
+      int found = 0;
+      int x;
+      C[0] = 0;
+      for(x = 1; x < n; x++)
+      {
+         int min = 100000;
+         for(int m = 0; m < k; m++)
+         {
+            if(x - d[m] >= 0)
+            {
+               if(C[x-d[m]] < min)
+               {
+                  A[x] = m;
+                  min = C[x-d[m]];
+               }
+            }
+         }
+         C[x] = 1 + min;
+      }
+      System.out.print("C = ");
+      for(int y = 0; y < n; y++)
+      {
+         System.out.print(C[y] + " ");
+      }
+      System.out.println();
       return d;
    }
 
