@@ -33,7 +33,7 @@ class ChangeMaker {
          C[x] = 1 + min;
       }
       System.out.print("C = ");
-      for(int y = 0; y < n; y++)
+      for(int y = 0; y <= n; y++)
       {
          System.out.print(C[y] + " ");
       }
