@@ -39,7 +39,6 @@ class ChangeMaker {
       }
       System.out.println();
       int i = n;
-      int count = 0;
       while(i > 0)
       {
          B[A[i]]++;
