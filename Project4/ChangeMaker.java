@@ -16,7 +16,7 @@ class ChangeMaker {
       int found = 0;
       int x;
       C[0] = 0;
-      for(x = 1; x < n; x++)
+      for(x = 1; x <= n; x++)
       {
          int min = 100000;
          for(int m = 0; m < k; m++)
@@ -33,7 +33,7 @@ class ChangeMaker {
          C[x] = 1 + min;
       }
       System.out.print("C = ");
-      for(int y = 0; y <= n; y++)
+      for(int y = 1; y <= n; y++)
       {
          System.out.print(C[y] + " ");
       }
