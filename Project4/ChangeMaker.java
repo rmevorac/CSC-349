@@ -14,17 +14,19 @@ class ChangeMaker {
       return d;
    }
 
-   public static void main(String[] args) throws FileNotFoundException {
-      System.out.println("Please enter the filename:");
+   public static void main(String[] args) {
+      int i;
+      System.out.println("Enter the number of coin-denominations and the set of coin values:");
       Scanner sc = new Scanner(System.in);
-      String fname = sc.next();
-      File file = new File(fname);
-      try {
-         Scanner fsc = new Scanner(file);
-      }
-
-      catch (FileNotFoundException ex) {
-         System.out.println("File does not exist");
-      }
+      int x = sc.nextInt();
+      int[] d = new int[x];
+      for(i = 0; i < x; i++)
+         d[i] = sc.nextInt();
+      System.out.println("Enter a positive amount to be changed (enter 0 to quit):");
+      int n = sc.nextInt();
+      System.out.print("Coin array of size " + x + ": ");
+      for(i = 0; i < x; i++)
+         System.out.print("["+ d[i] + "] ");
+      System.out.println("\nAmount to be changed: " + n);
    }
 }
