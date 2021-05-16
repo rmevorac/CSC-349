@@ -38,7 +38,14 @@ class ChangeMaker {
          System.out.print(C[y] + " ");
       }
       System.out.println();
-      return d;
+      int i = n;
+      int count = 0;
+      while(i > 0)
+      {
+         B[A[i]]++;
+         i = i - d[A[i]];
+      }
+      return B;
    }
 
    public static void main(String[] args) {
