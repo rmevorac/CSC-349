@@ -64,21 +64,30 @@ class ChangeMaker {
       for(i = 0; i < x; i++)
          System.out.print("["+ d[i] + "] ");
       System.out.println("\nAmount to be changed: " + n);
-      int[] s = new int[x];
+      int[] B = new int[x];
       try{
-         s = change_DP(n,d);
+         B = change_DP(n,d);
       }
       catch(IllegalArgumentException e) {
          System.out.println("Input Error");
       }
-      String od = "ASSIGN OPTIMAL DISTRIBUTION HERE";
       int cc = 0;
-      System.out.println("DP algorithm results\nAmount: " + n + "\nOptimal distribution: " + od);
-      System.out.println("Optimal coin count: " + cc);
+      System.out.print("DP algorithm results\nAmount: " + n + "\nOptimal distribution:");
+      for(i = 0; i < x; i++)
+      {
+         if(B[i] > 0)
+         {
+            if(cc !=0)
+               System.out.print(" +");
+            System.out.print(" " + B[i] + "*" + d[i] + "c");
+            cc += B[i];
+         }
+      }
+      System.out.println("\nOptimal coin count: " + cc);
       System.out.print("B = ");
       for(int y = 0; y < x; y++)
       {
-         System.out.print(s[y] + " ");
+         System.out.print(B[y] + " ");
       }
       System.out.println();
    }
