@@ -30,12 +30,6 @@ class ChangeMaker {
          C[x] = 1 + min;
       }
 
-      // System.out.print("C = ");
-      // for(int y = 1; y <= n; y++) {
-      //    System.out.print(C[y] + " ");
-      // }
-      // System.out.println();
-
       int i = n;
       while(i > 0) {
          B[A[i]]++;
@@ -75,18 +69,12 @@ class ChangeMaker {
       while (true) {
          System.out.println("Enter a positive amount to be changed (enter 0 to quit):");
          int n = sc.nextInt();
-         System.out.println();
          
          if(n == 0) {
             System.out.println("Thanks for playing. Good Bye.");
             return;
          }
-         
-         // System.out.print("Coin array of size " + x + ": ");
-         // for(i = 0; i < x; i++)
-         //    System.out.print("["+ d[i] + "] ");
 
-         // System.out.println("\nAmount to be changed: " + n);
          int[] B = new int[x];
          
          try {
@@ -108,10 +96,6 @@ class ChangeMaker {
          }
 
          System.out.println("\nOptimal coin count: " + cc);
-         // System.out.print("B = ");
-         // for(int y = 0; y < x; y++) {
-         //    System.out.print(B[y] + " ");
-         // }
 
          try {
             B = change_greedy(n, d);
@@ -132,10 +116,6 @@ class ChangeMaker {
          }
 
          System.out.println("\nOptimal coin count: " + cc + "\n");
-         // System.out.print("B = ");
-         // for(int y = 0; y < x; y++) {
-         //    System.out.print(B[y] + " ");
-         // }
       }
    }
 }
