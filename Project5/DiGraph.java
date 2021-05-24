@@ -25,6 +25,18 @@ class DiGraph {
          graph[from].add(to);
       }
    }
+   public int edgeCount()
+   {
+      int count = 0;
+      for(int i = 0; i <= graph.length; i++)
+      {
+         for(int q = 0; q <= graph[i].length; q++)
+         {
+            count++;
+         }
+      }
+      return count;
+   }
 
    public static void main(String[] args) {
       Scanner sc = new Scanner(System.in);
@@ -35,7 +47,7 @@ class DiGraph {
          System.out.println("Choose one of the following operations:");
          System.out.println("-add edge (enter a)\n-delete edge (enter d)\n-edge count (enter e)");
          System.out.println("-vertex count (enter v)\n-print graph (enter p)\n-Quit (enter q)");
-         char in = sc.nextInt();
+         char in = sc.nextByte();
          
          if(in == 'q') {
             System.out.println("Thanks for playing. Good Bye.");
