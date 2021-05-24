@@ -25,13 +25,13 @@ class DiGraph {
          graph.get(from - 1).remove(Integer.valueOf(to));
          System.out.println("(" + from + ", " + to + ") " + "edge is now removed from the graph");
       }
-
-      System.out.println("Edge does not exist");
+      else
+         System.out.println("Edge does not exist");
    }
    public void addEdge(int from, int to) {
       if (!graph.get(from - 1).contains(to)) {
          graph.get(from - 1).add(to);
-         System.out.println("(" + from + ", " + to + ") " + "edge is now added to the graph");
+         System.out.println("(" + from + "," + to + ") edge is now added to the graph");
       }
 
       else {
@@ -65,6 +65,54 @@ class DiGraph {
          System.out.print("\n");
       }
    }
+   private int[] indegrees()
+   {
+      int[] indegs = new int[graph.size()];
+      for(int i = 0; i < graph.size(); i++)
+      {
+         //System.out.println("i = " + i);
+         for(int q = 0; q < graph.get(i).size();q++)
+         {
+            //System.out.println("q = " + q);
+            indegs[graph.get(i).get(q)-1] = indegs[graph.get(i).get(q)-1] + 1;
+         }
+      }
+      return indegs;
+   }
+   public int[] topSort()
+   {
+      LinkedList<Integer> queue = new LinkedList<Integer>();
+      int[] result = new int[graph.size()];
+      int[] indegs = indegrees();
+      for(int i = 0; i < graph.size(); i++)
+      {
+         if(indegs[i] == 0)
+         {
+            queue.addLast(i+1);
+         }
+      }
+      int i = 0;
+      while(!queue.isEmpty())
+      {
+         int u = queue.removeFirst();
+         result[i] = u;
+         i++;
+         for(int v = 0; v < graph.get(u-1).size();v++)
+         {
+            indegs[graph.get(u-1).get(v)-1] = indegs[graph.get(u-1).get(v)-1]-1;
+            if(indegs[graph.get(u-1).get(v)-1] == 0)
+            {
+               queue.addLast(graph.get(u-1).get(v));
+            }
+         }
+      }
+      if(i < graph.size())
+      {
+         System.out.println("Cycle Detected!");
+         throw new IllegalArgumentException();
+      }
+      return result;
+   }
 
    public static void main(String[] args) {
       Scanner sc = new Scanner(System.in);
@@ -83,7 +131,7 @@ class DiGraph {
          char in = sc.next().charAt(0);
          
          if (in == 'q') {
-            System.out.println("Thanks for playing. Good Bye.");
+            System.out.println("Good bye.");
             return;
          }
 
@@ -117,13 +165,23 @@ class DiGraph {
                   digraph.print();
                   break;
 
+               case 't':
+                  int[] result = digraph.topSort();
+                  System.out.println("Topsorted List:");
+                  for(int i = 0; i < digraph.vertexCount()-1; i++)
+                  {
+                     System.out.print(result[i] + ", ");
+                  }
+                  System.out.println(result[digraph.vertexCount()-1]);
+                  break;
+
                default:
                   throw new IllegalArgumentException();
             }
          }
 
          catch(IllegalArgumentException e) {
-            System.out.println("Input Error: this is an invalid menu choice");
+            System.out.println("Illegal Argument Exception");
          }
       }
    }
