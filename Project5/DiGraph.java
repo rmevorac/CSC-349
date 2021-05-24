@@ -129,13 +129,16 @@ class DiGraph {
 
       while (true) {
          char in = sc.next().charAt(0);
-         
+         String fake = sc.nextLine();
          if (in == 'q') {
             System.out.println("Good bye.");
             return;
          }
-
          try {
+            if(s.length() > 1 || fake.length() > 0)
+            {
+               throw new IllegalArgumentException();
+            }
             switch (in) {
                case 'a':
                   System.out.println("Enter vertices (from then to):");
