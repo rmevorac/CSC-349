@@ -28,6 +28,7 @@ class DiGraph {
       else
          System.out.println("Edge does not exist");
    }
+   
    public void addEdge(int from, int to) {
       if (!graph.get(from - 1).contains(to)) {
          graph.get(from - 1).add(to);
@@ -65,49 +66,40 @@ class DiGraph {
          System.out.print("\n");
       }
    }
-   private int[] indegrees()
-   {
+
+   private int[] indegrees() {
       int[] indegs = new int[graph.size()];
-      for(int i = 0; i < graph.size(); i++)
-      {
-         //System.out.println("i = " + i);
-         for(int q = 0; q < graph.get(i).size();q++)
-         {
-            //System.out.println("q = " + q);
+      for(int i = 0; i < graph.size(); i++) {
+         for(int q = 0; q < graph.get(i).size();q++) {
             indegs[graph.get(i).get(q)-1] = indegs[graph.get(i).get(q)-1] + 1;
          }
       }
       return indegs;
    }
-   public int[] topSort()
-   {
+
+   public int[] topSort() {
       LinkedList<Integer> queue = new LinkedList<Integer>();
       int[] result = new int[graph.size()];
       int[] indegs = indegrees();
-      for(int i = 0; i < graph.size(); i++)
-      {
-         if(indegs[i] == 0)
-         {
+      for(int i = 0; i < graph.size(); i++) {
+         if(indegs[i] == 0) {
             queue.addLast(i+1);
          }
       }
       int i = 0;
-      while(!queue.isEmpty())
-      {
+      while(!queue.isEmpty()) {
          int u = queue.removeFirst();
          result[i] = u;
          i++;
-         for(int v = 0; v < graph.get(u-1).size();v++)
-         {
+         for(int v = 0; v < graph.get(u-1).size();v++) {
             indegs[graph.get(u-1).get(v)-1] = indegs[graph.get(u-1).get(v)-1]-1;
-            if(indegs[graph.get(u-1).get(v)-1] == 0)
-            {
+            if(indegs[graph.get(u-1).get(v)-1] == 0) {
                queue.addLast(graph.get(u-1).get(v));
             }
          }
       }
-      if(i < graph.size())
-      {
+
+      if(i < graph.size()) {
          System.out.println("Cycle Detected!");
          throw new IllegalArgumentException();
       }
