@@ -128,12 +128,15 @@ class DiGraph {
       System.out.println("-vertex count (enter v)\n-print graph (enter p)\n-Quit (enter q)");
 
       while (true) {
-         char in = sc.next().charAt(0);
+         String s = sc.next();
          String fake = sc.nextLine();
+         char in = s.charAt(0);
+         
          if (in == 'q') {
             System.out.println("Good bye.");
             return;
          }
+
          try {
             if(s.length() > 1 || fake.length() > 0)
             {
