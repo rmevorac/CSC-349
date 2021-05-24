@@ -9,8 +9,9 @@ import java.io.FileNotFoundException;
 
 class DiGraph {
    private LinkedList[] graph;
-   DiGraph(){
+   DiGraph(int N){
       System.out.println("DiGraph constructor init");
+      graph = new LinkedList[N];
    }
    public static void main(String[] args) {
       Scanner sc = new Scanner(System.in);
