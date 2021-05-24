@@ -8,11 +8,19 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 class DiGraph {
-   private LinkedList[] graph;
+   private Array<LinkedList> graph;
+
    DiGraph(int N){
       System.out.println("DiGraph constructor init");
-      graph = new LinkedList[N];
+      graph = new Array<LinkedList>(N);
    }
+
+   public void deleteEdge(int from, int to) {
+      if (graph[from].contains(to)) {
+         graph[from].remove(to);
+      }
+   }
+
    public static void main(String[] args) {
       Scanner sc = new Scanner(System.in);
       
