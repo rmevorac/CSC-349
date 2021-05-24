@@ -20,6 +20,11 @@ class DiGraph {
          graph[from].remove(to);
       }
    }
+   public void addEdge(int from, int to) {
+      if(!graph[from].contains(to)) {
+         graph[from].add(to);
+      }
+   }
 
    public static void main(String[] args) {
       Scanner sc = new Scanner(System.in);
