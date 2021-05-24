@@ -8,6 +8,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 class DiGraph {
+   private LinkedList[] graph;
+   DiGraph(){
+      System.out.println("DiGraph constructor init");
+   }
    public static void main(String[] args) {
       Scanner sc = new Scanner(System.in);
       
@@ -32,4 +36,5 @@ class DiGraph {
          }
       }
    }
+
 }
