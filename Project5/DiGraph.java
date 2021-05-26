@@ -12,7 +12,6 @@ class DiGraph {
    private ArrayList<LinkedList<Integer>> graph;
 
    DiGraph(int N){
-      System.out.println("DiGraph constructor initialized");
       graph = new ArrayList<LinkedList<Integer>>(N);
 
       for (int i = 0; i < N; i++) {
@@ -28,7 +27,7 @@ class DiGraph {
       else
          System.out.println("Edge does not exist");
    }
-   
+
    public void addEdge(int from, int to) {
       if (!graph.get(from - 1).contains(to)) {
          graph.get(from - 1).add(to);
@@ -39,6 +38,7 @@ class DiGraph {
          System.out.println("Edge already exists");
       }
    }
+
    public int edgeCount() {
       int count = 0;
       for (int i = 0; i < graph.size(); i++) {
