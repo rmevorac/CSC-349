@@ -116,11 +116,12 @@ class DiGraph {
       return result;
    }
 
-   public VertexInfo[] BFS(int s) {
+   private VertexInfo[] BFS(int s) {
+      s = s-1;
       int N = graph.size();
-      VertexInfo[] tree = new VertexInfo[N+1];
+      VertexInfo[] tree = new VertexInfo[N];
       LinkedList<Integer> queue = new LinkedList<Integer>();
-      for(int i = 1; i < N+1; i++) {
+      for(int i = 0; i < N; i++) {
          tree[i] = new VertexInfo();
       }
       tree[s].distance = 0;
@@ -129,18 +130,18 @@ class DiGraph {
       while(!queue.isEmpty()) {
          int u = queue.getFirst();
          queue.removeFirst();
-         for(int v : graph.get(u-1)) {
-            if(tree[v].distance == -1) {
-               tree[v].distance = tree[u].distance+1;
-               tree[v].parent = u;
-               queue.addLast(v);
+         for(int v : graph.get(u)) {
+            if(tree[v-1].distance == -1) {
+               tree[v-1].distance = tree[u].distance+1;
+               tree[v-1].parent = u+1;
+               queue.addLast(v-1);
             }
          }
          
       }
 
-      for(int i = 1; i < tree.length; i++) {
-         System.out.println(i + ": distance = " + tree[i].distance + " parent = " + tree[i].parent);
+      for(int i = 0; i < tree.length; i++) {
+         System.out.println(i+1 + ": distance = " + tree[i].distance + " parent = " + tree[i].parent);
       }
 
       return tree;
@@ -149,15 +150,16 @@ class DiGraph {
    public boolean isTherePath(int from, int to) {
       boolean result = false;
       VertexInfo[] tree = BFS(from);
-      VertexInfo current = tree[to - 1];
+      VertexInfo current = tree[to-1];
 
-      while (current.distance > 0 || result == true) {
+      while (current.distance > 0 && result == false) {
          if (current.parent == from) {
             result = true;
          }
 
          else {
-            current = tree[current.parent - 1];
+            System.out.println("current.parent = " + current.parent);
+            current = tree[current.parent-1];
          }
       }
 

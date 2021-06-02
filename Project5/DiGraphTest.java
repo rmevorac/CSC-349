@@ -66,8 +66,25 @@ class DiGraphTest {
                   digraph.print();
                   break;
                
-               case 'b':
-                  digraph.BFS(4);
+               case 'i':
+                  System.out.println("Enter vertices (from then to):");
+                  from = sc.nextInt();
+                  to = sc.nextInt();
+                  System.out.println(digraph.isTherePath(from, to));
+                  break;
+
+               case 'l':
+                  System.out.println("Enter vertices (from then to):");
+                  from = sc.nextInt();
+                  to = sc.nextInt();
+                  System.out.println("length = " + digraph.lengthOfPath(from, to));
+                  break;
+               
+               case 's':
+                  System.out.println("Enter vertices (from then to):");
+                  from = sc.nextInt();
+                  to = sc.nextInt();
+                  digraph.printPath(from, to);
                   break;
 
                case 't':
