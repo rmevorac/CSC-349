@@ -7,16 +7,17 @@ import java.util.*;
 import java.io.File;
 import java.util.Arrays;
 import java.io.FileNotFoundException;
-private class VertexInfo {
-   int distance;
-   int parent;
-   VertexInfo()
-   {
-      this.distance = 0;
-      this.parent = 0;
-   }
-}
+
 class DiGraph {
+   private class VertexInfo {
+      int distance;
+      int parent;
+      VertexInfo()
+      {
+         this.distance = -1;
+         this.parent = -1;
+      }
+   }
    private ArrayList<LinkedList<Integer>> graph;
 
    DiGraph(int N){
@@ -113,16 +114,36 @@ class DiGraph {
       }
       return result;
    }
-   private int[] BFS(int s)
+   public VertexInfo[] BFS(int s)
    {
-      VertexInfo[] tree = new VertexInfo[graph.size()];
+      int N = graph.size();
+      VertexInfo[] tree = new VertexInfo[N+1];
       LinkedList<Integer> queue = new LinkedList<Integer>();
-      tree[0].parent = 0;
-
+      for(int i = 1; i < N+1; i++)
+      {
+         tree[i] = new VertexInfo();
+      }
+      tree[s].distance = 0;
+      queue.addLast(s);
       while(!queue.isEmpty()) {
+         int u = queue.getFirst();
+         queue.removeFirst();
+         for(int v : graph.get(u-1))
+         {
+            if(tree[v].distance == -1)
+            {
+               tree[v].distance = tree[u].distance+1;
+               tree[v].parent = u;
+               queue.addLast(v);
+            }
+         }
          
       }
-
+      for(int i = 1; i < tree.length; i++)
+      {
+         System.out.println(i + ": distance = " + tree[i].distance + " parent = " + tree[i].parent);
+      }
+      return tree;
    }
 
 }

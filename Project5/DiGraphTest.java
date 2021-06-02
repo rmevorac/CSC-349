@@ -65,6 +65,10 @@ class DiGraphTest {
                case 'p':
                   digraph.print();
                   break;
+               
+               case 'b':
+                  digraph.BFS(4);
+                  break;
 
                case 't':
                   int[] result = digraph.topSort();
