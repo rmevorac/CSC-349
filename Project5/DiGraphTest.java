@@ -86,6 +86,11 @@ class DiGraphTest {
                   to = sc.nextInt();
                   digraph.printPath(from, to);
                   break;
+               
+               case 'o':
+                  digraph.buildTree(4);
+                  break;
+
 
                case 't':
                   int[] result = digraph.topSort();

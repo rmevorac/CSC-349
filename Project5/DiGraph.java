@@ -17,6 +17,14 @@ class DiGraph {
          this.parent = -1;
       }
    }
+   private class TreeNode {
+      int type;
+      LinkedList<TreeNode> children;
+      TreeNode(int v) {
+         this.type = v;
+         this.children = new LinkedList<TreeNode>();
+      }
+   }
    
    private ArrayList<LinkedList<Integer>> graph;
 
@@ -189,6 +197,20 @@ class DiGraph {
          output = from + output;
          System.out.println(output);
       }
+   }
+   public TreeNode buildTree(int s) {
+      VertexInfo[] tree = BFS(s);
+      TreeNode[] temp = new TreeNode[tree.length];
+      for(int i = 0; i < tree.length;i++)
+      {
+         temp[i] = new TreeNode(i);
+      }
+      for(int i = 0; i < tree.length;i++)
+      {
+         if(tree[i].parent != -1)
+            temp[tree[i].parent-1].children.add(temp[i]);
+      }
+      return temp[s-1];
    }
 
 }
