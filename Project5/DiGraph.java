@@ -4,6 +4,7 @@
 // Project 5
 
 import java.util.*;
+import java.util.Formatter;
 import java.io.File;
 import java.util.Arrays;
 import java.io.FileNotFoundException;
@@ -12,16 +13,19 @@ class DiGraph {
    private class VertexInfo {
       int distance;
       int parent;
+
       VertexInfo() {
          this.distance = -1;
          this.parent = -1;
       }
    }
+
    private class TreeNode {
-      int type;
+      int vertexNumber;
       LinkedList<TreeNode> children;
-      TreeNode(int v) {
-         this.type = v;
+
+      TreeNode(int num) {
+         this.vertexNumber = num;
          this.children = new LinkedList<TreeNode>();
       }
    }
@@ -166,7 +170,6 @@ class DiGraph {
          }
 
          else {
-            System.out.println("current.parent = " + current.parent);
             current = tree[current.parent-1];
          }
       }
@@ -198,19 +201,49 @@ class DiGraph {
          System.out.println(output);
       }
    }
+
    public TreeNode buildTree(int s) {
       VertexInfo[] tree = BFS(s);
       TreeNode[] temp = new TreeNode[tree.length];
-      for(int i = 0; i < tree.length;i++)
-      {
-         temp[i] = new TreeNode(i);
+
+      for(int i = 0; i < tree.length;i++) {
+         temp[i] = new TreeNode(i + 1);
       }
-      for(int i = 0; i < tree.length;i++)
-      {
+
+      for(int i = 0; i < tree.length;i++) {
          if(tree[i].parent != -1)
             temp[tree[i].parent-1].children.add(temp[i]);
       }
+
       return temp[s-1];
+   }
+
+   public void printTree(int s) {
+      TreeNode root = buildTree(s);
+      System.out.println("hello");
+      printTree(root, 0);
+   }
+
+   private void printTree(TreeNode root, int level) {
+      int count = level * 4;
+
+      if (count > 0) {
+         String s = String.format("%" + count + "s", " "); 
+         System.out.print(s);
+      }
+
+      if (root.children.isEmpty()) {
+         System.out.println(root.vertexNumber);
+      }
+
+      else {
+         System.out.println(root.vertexNumber);
+         level++;
+         for (int i = 0; i < root.children.size(); i++) {
+            printTree(root.children.get(i), level);
+            
+         }
+      }
    }
 
 }

@@ -14,7 +14,7 @@ class DiGraphTest {
 
       System.out.println("Enter number of vertices");
 
-      int from, to;
+      int from, to, src;
       int N = sc.nextInt();
       DiGraph digraph = new DiGraph(N);
 
@@ -45,6 +45,12 @@ class DiGraphTest {
                   digraph.addEdge(from, to);
                   break;
 
+               case 'b':
+                  System.out.println("Enter source vertex:");
+                  src = sc.nextInt();
+                  digraph.printTree(src);
+                  break;
+
                case 'd':
                   System.out.println("Enter vertices (from then to):");
                   from = sc.nextInt();
@@ -55,15 +61,6 @@ class DiGraphTest {
                case 'e':
                   int numEdges = digraph.edgeCount();
                   System.out.println("Number of edges is " + numEdges);
-                  break;
-
-               case 'v':
-                  int numVert = digraph.vertexCount();
-                  System.out.println("Number of vertices is " + numVert);
-                  break;
-
-               case 'p':
-                  digraph.print();
                   break;
                
                case 'i':
@@ -79,6 +76,10 @@ class DiGraphTest {
                   to = sc.nextInt();
                   System.out.println("length = " + digraph.lengthOfPath(from, to));
                   break;
+
+               case 'p':
+                  digraph.print();
+                  break;
                
                case 's':
                   System.out.println("Enter vertices (from then to):");
@@ -86,11 +87,6 @@ class DiGraphTest {
                   to = sc.nextInt();
                   digraph.printPath(from, to);
                   break;
-               
-               case 'o':
-                  digraph.buildTree(4);
-                  break;
-
 
                case 't':
                   int[] result = digraph.topSort();
@@ -100,6 +96,11 @@ class DiGraphTest {
                      System.out.print(result[i] + ", ");
                   }
                   System.out.println(result[digraph.vertexCount()-1]);
+                  break;
+
+               case 'v':
+                  int numVert = digraph.vertexCount();
+                  System.out.println("Number of vertices is " + numVert);
                   break;
 
                default:
@@ -112,5 +113,4 @@ class DiGraphTest {
          }
       }
    }
-
 }
