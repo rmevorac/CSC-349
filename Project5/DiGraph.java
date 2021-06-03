@@ -151,11 +151,6 @@ class DiGraph {
          }
          
       }
-
-      for(int i = 0; i < tree.length; i++) {
-         System.out.println(i+1 + ": distance = " + tree[i].distance + " parent = " + tree[i].parent);
-      }
-
       return tree;
    }
 
@@ -220,7 +215,6 @@ class DiGraph {
 
    public void printTree(int s) {
       TreeNode root = buildTree(s);
-      System.out.println("hello");
       printTree(root, 0);
    }
 
